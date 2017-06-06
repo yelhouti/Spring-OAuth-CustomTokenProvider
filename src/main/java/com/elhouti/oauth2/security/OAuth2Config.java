@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 @Configuration
@@ -20,18 +21,14 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-//	@Autowired
-//	private TokenStore tokenStore;
-	@Autowired
-	private CustomResourceOwnerPasswordTokenGranter customResourceOwnerPasswordTokenGranter;
-
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager);
+//		endpoints.authenticationManager(authenticationManager);
 		LOGGER.debug("authenticationManager: "+authenticationManager);
 		//endpoints.tokenStore(tokenStore);
 		endpoints.tokenStore(new InMemoryTokenStore());
-		endpoints.tokenGranter(customResourceOwnerPasswordTokenGranter);
+		endpoints.tokenGranter(new CustomResourceOwnerPasswordTokenGranter(authenticationManager, endpoints.getTokenServices(),
+				endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory()));
 
 	}
 

@@ -15,12 +15,12 @@ import org.springframework.web.client.RestTemplate;
 /**
  * Created by yeh on 06.06.2017.
  */
-@Component
 public class CustomResourceOwnerPasswordTokenGranter extends ResourceOwnerPasswordTokenGranter {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(CustomResourceOwnerPasswordTokenGranter.class);
 
     @Autowired
     RestTemplate restTemplate;
-    private static Logger LOGGER = LoggerFactory.getLogger(CustomResourceOwnerPasswordTokenGranter.class);
 
     public CustomResourceOwnerPasswordTokenGranter(AuthenticationManager authenticationManager, AuthorizationServerTokenServices tokenServices, ClientDetailsService clientDetailsService, OAuth2RequestFactory requestFactory) {
         super(authenticationManager, tokenServices, clientDetailsService, requestFactory);
@@ -31,12 +31,13 @@ public class CustomResourceOwnerPasswordTokenGranter extends ResourceOwnerPasswo
         OAuth2Authentication auth = super.getOAuth2Authentication(client, tokenRequest);
         LOGGER.debug("scope:"+tokenRequest.getScope());
         if(tokenRequest.getScope().contains("trust")){
-            if(restTemplate.exchange(null,String.class).getStatusCode().equals(HttpStatus.OK)){
-                return auth;
-            }
-            else {
-                throw new InvalidGrantException("Could not authenticate using two factor");
-            }
+//            if(restTemplate.exchange(null,String.class).getStatusCode().equals(HttpStatus.OK)){
+//                return auth;
+//            }
+//            else {
+//                throw new InvalidGrantException("Could not authenticate using two factor");
+//            }
+            throw new InvalidGrantException("Could not authenticate using two factor");
         }else{
             return auth;
         }
