@@ -1,4 +1,4 @@
-package security;
+package com.elhouti.oauth2.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

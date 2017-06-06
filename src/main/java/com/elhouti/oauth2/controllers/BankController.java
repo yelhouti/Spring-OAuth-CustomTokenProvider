@@ -1,4 +1,4 @@
-package controllers;
+package com.elhouti.oauth2.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
