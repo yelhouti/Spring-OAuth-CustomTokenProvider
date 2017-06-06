@@ -29,10 +29,10 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-starter-com.elhouti.oauth2.security')
-    compile('org.springframework.com.elhouti.oauth2.security.oauth:spring-com.elhouti.oauth2.security-oauth2')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.security.oauth:spring-security-oauth2')
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt
-    compile group: 'org.springframework.com.elhouti.oauth2.security', name: 'spring-com.elhouti.oauth2.security-jwt', version: '1.0.8.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.8.RELEASE'
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
